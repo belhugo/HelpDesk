@@ -8,6 +8,7 @@
                 $correo = $_POST["usu_correo"];
                 $pass = $_POST["usu_pass"];
                 $rol = $_POST["rol_id"];
+
                 if(empty($correo) and empty($pass)){
                     header("Location:".conectar::ruta()."index.php?m=2");
 					exit();
@@ -24,7 +25,7 @@
                         $_SESSION["usu_nom"]=$resultado["usu_nom"];
                         $_SESSION["usu_ape"]=$resultado["usu_ape"];
                         $_SESSION["rol_id"]=$resultado["rol_id"];
-                        header("Location:".Conectar::ruta()."view/Home/");
+                        header("Location:".Conectar::ruta()."view/home/");
                         exit(); 
                     }else{
                         header("Location:".Conectar::ruta()."index.php?m=1");

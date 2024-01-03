@@ -37,11 +37,16 @@
     <div class="page-center">
         <div class="page-center-in">
             <div class="container-fluid">
+                
                 <form class="sign-box" action="" method="post" id="login_form">
+
+                    <!-- Rol de usuario -->
+                    <input type="hidden" id="rol_id" name="rol_id" value="1">
+
                     <div class="sign-avatar">
-                        <img src="public/img/avatar-sign.png" alt="">
+                        <img src="public/1.jpg" alt="" id="imgtipo">
                     </div>
-                    <header class="sign-title">Acceso</header>
+                    <header class="sign-title" id="lbltitulo">Acceso Usuario</header>
 
                     <?php
                         if (isset($_GET["m"])){
@@ -79,7 +84,10 @@
                     <div class="form-group">
                         <input type="password" id="usu_pass" name="usu_pass" class="form-control" placeholder="Password"/>
                     </div>
-                    <div class="form-group">                        
+                    <div class="form-group">
+                        <div class="float-left reset">
+                            <a href="#" id="btnsoporte">Acceso Soporte</a>
+                        </div>                        
                         <div class="float-right reset">
                             <a href="reset-password.html">Cambiar Contraseña</a>
                         </div>
@@ -117,5 +125,7 @@
         });
     </script>
 <script src="public/js/app.js"></script>
+
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
