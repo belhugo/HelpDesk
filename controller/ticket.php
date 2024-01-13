@@ -18,7 +18,7 @@
                 foreach ($datos as $row){
                     $output["tick_id"] = $row["tick_id"];
 
-                    if ($_FILES['files']['name']==0){
+                    if ($_FILES['files']['name']==NULL){
 
                     }else{
                         $countfiles = count($_FILES['files']['name']);

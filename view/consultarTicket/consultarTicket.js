@@ -146,6 +146,13 @@ function guardar(e){
         contentType: false,
         processData: false,
         success: function(datos){
+            var tick_id = $('#tick_id').val();
+            $.post("../../controller/email.php?op=ticket_asignado", {tick_id : tick_id}, function (data) {
+
+            });
+
+            swal("Correcto!", "Asignado Correctamente", "success");
+            
             $("#modalasignar").modal('hide');
             $('#ticket_data').DataTable().ajax.reload();
         }

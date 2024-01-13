@@ -149,7 +149,11 @@ $(document).on("click","#btncerrarticket", function(){
             var usu_id = $('#user_idx').val();
             $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
 
-            }); 
+            });
+            
+            $.post("../../controller/email.php?op=ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
 
             listardetalle(tick_id);
 
