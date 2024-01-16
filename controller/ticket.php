@@ -52,6 +52,11 @@
             $ticket->update_ticket_asignacion($_POST["tick_id"],$_POST["usu_asig"]);
         break;
 
+        case "reabrir":
+            $ticket->reabrir_ticket($_POST["tick_id"]);
+            $ticket->insert_ticketdetalle_reabrir($_POST["tick_id"],$_POST["usu_id"]);
+        break;
+
         case "listar_x_usu":
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
             $data= Array();
@@ -64,7 +69,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a style="border-bottom: none" onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span></a>';
                 }
 
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
@@ -76,7 +81,7 @@
                 }
 
                 if($row["usu_asig"]==null){
-                    $sub_array[] = '<a onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
+                    $sub_array[] = '<a style="border-bottom: none" onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
@@ -108,7 +113,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a style="border-bottom: none" onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span></a>';
                 }
                 
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
@@ -120,7 +125,7 @@
                 }
 
                 if($row["usu_asig"]==null){
-                    $sub_array[] = '<a onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
+                    $sub_array[] = '<a style="border-bottom: none" onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
