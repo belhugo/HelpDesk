@@ -1,7 +1,7 @@
 <?php
     class Ticket extends Conectar{
 
-        public function insert_ticket($usu_id,$cat_id,$subcat_id,$tick_titulo,$tick_descrip){
+        public function insert_ticket($usu_id,$cat_id,$subcat_id,$tick_titulo,$tick_descrip){   
             $conectar= parent::conexion();
             parent::set_names();
             $sql="INSERT INTO tm_ticket (tick_id,usu_id,cat_id,subcat_id,tick_titulo,tick_descrip,tick_estado,fech_crea,usu_asig,fech_asig,est) VALUES (NULL,?,?,?,?,?,'Abierto',now(),NULL,NULL,'1');";
@@ -107,6 +107,8 @@
                 tm_ticket.tick_descrip,
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
+                tm_ticket.tick_estrella,
+                tm_ticket.tick_comentario,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_ape,
                 tm_usuario.usu_correo,
@@ -245,6 +247,23 @@
                 tm_categoria.cat_nom 
                 ORDER BY total DESC";
             $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function insert_encuesta($tick_id,$tick_estre,$tick_comment){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="update tm_ticket 
+                set	
+                    tick_estrella = ?,
+                    tick_comentario = ?
+                where
+                    tick_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $tick_estre);
+            $sql->bindValue(2, $tick_comment);
+            $sql->bindValue(3, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }

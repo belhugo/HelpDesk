@@ -12,7 +12,7 @@ class Email extends PHPMailer{
     //variable que contiene el correo del destinatario
     protected $gCorreo = 'cryptobellok@gmail.com';
     //variable que contiene la contraseña del destinatario
-    protected $gContrasena = '';
+    protected $gContrasena = 'yufz pplg nurz jooj';
     
 
     public function ticket_abierto($tick_id){

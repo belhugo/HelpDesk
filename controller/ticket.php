@@ -81,7 +81,7 @@
                 }
 
                 if($row["usu_asig"]==null){
-                    $sub_array[] = '<a style="border-bottom: none" onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
+                    $sub_array[] = '<a id="asignar" style="border-bottom: none" onClick="asignar('.$row["tick_id"].')"><span class="label label-pill label-warning">Sin Asignar</span></a>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
@@ -218,6 +218,8 @@
                     $output["usu_ape"] = $row["usu_ape"];
                     $output["cat_nom"] = $row["cat_nom"];
                     $output["subcat_nom"] = $row["subcat_nom"];
+                    $output["tick_estrella"] = $row["tick_estrella"];
+                    $output["tick_comentario"] = $row["tick_comentario"];
                 }
                 echo json_encode($output);
             }   
@@ -263,6 +265,10 @@
         case "grafico";
             $datos=$ticket->get_ticket_grafico();  
             echo json_encode($datos);
+        break;
+
+        case "encuesta":
+            $ticket->insert_encuesta($_POST["tick_id"],$_POST["tick_estre"],$_POST["tick_coment"]);
         break;
     }
 ?>
