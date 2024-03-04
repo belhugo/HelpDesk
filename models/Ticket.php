@@ -150,6 +150,12 @@
             $sql->bindValue(2, $usu_id);
             $sql->bindValue(3, $tickd_descrip);
             $sql->execute();
+
+            /* TODO: Devuelve el ultimo ID ingresado */
+            $sql1="select last_insert_id() as 'tickd_id';";
+            $sql1=$conectar->prepare($sql1);
+            $sql1->execute();
+            return $resultado=$sql1->fetchAll(pdo::FETCH_ASSOC);
         }
 
         public function insert_ticketdetalle_cerrar($tick_id,$usu_id){
