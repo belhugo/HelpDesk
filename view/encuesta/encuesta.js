@@ -19,9 +19,11 @@ function listardetalle(tick_id){
         $('#lblestado').val(data.tick_estado_texto);
         $('#lblnomusuario').val(data.usu_nom +' '+data.usu_ape);
         $('#lblfechcrea').val(data.fech_crea);
+        $('#lblfechcierre').val(data.fech_cierre);
         $('#lblnomidticket').val(data.tick_id);
         $('#cat_nom').val(data.cat_nom);
         $('#cats_nom').val(data.cats_nom);
+        $('#prio_nom').val(data.prio_nom);
         $('#tick_titulo').val(data.tick_titulo);
 
         if (data.tick_estado_texto=='Abierto') {

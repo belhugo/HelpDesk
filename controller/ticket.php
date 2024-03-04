@@ -12,7 +12,7 @@
     switch($_GET["op"]){
         
         case "insert":
-            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["subcat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["subcat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"],$_POST["prio_id"]);
 
             if (is_array($datos)==true and count($datos)>0){
                 foreach ($datos as $row){
@@ -65,6 +65,7 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
+                $sub_array[] = $row["prio_nom"];
 
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -78,6 +79,12 @@
                     $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
+                }
+
+                if($row["fech_cierre"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                 }
 
                 if($row["usu_asig"]==null){
@@ -109,6 +116,7 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
+                $sub_array[] = $row["prio_nom"];
                 
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -122,6 +130,12 @@
                     $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
+                }
+
+                if($row["fech_cierre"]==null){
+                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                 }
 
                 if($row["usu_asig"]==null){
@@ -214,10 +228,12 @@
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
                     $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+                    $output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_ape"] = $row["usu_ape"];
                     $output["cat_nom"] = $row["cat_nom"];
                     $output["subcat_nom"] = $row["subcat_nom"];
+                    $output["prio_nom"] = $row["prio_nom"];
                     $output["tick_estrella"] = $row["tick_estrella"];
                     $output["tick_comentario"] = $row["tick_comentario"];
                 }

@@ -46,6 +46,10 @@ $(document).ready(function() {
             $('#subcat_id').html(data);
         });
     });
+
+    $.post("../../controller/prioridad.php?op=combo",function(data, status){
+        $('#prio_id').html(data);
+    });
 });
 
 function guardaryeditar(e){
@@ -58,7 +62,7 @@ function guardaryeditar(e){
         for (var i = 0; i < totalfiles; i++) {
             formData.append("files[]", $('#fileElem')[0].files[i]);
         }
-
+        
         $.ajax({
             url: "../../controller/ticket.php?op=insert",
             type: "POST",

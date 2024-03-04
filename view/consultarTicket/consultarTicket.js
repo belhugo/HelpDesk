@@ -9,6 +9,7 @@ function init(){
 }
 
 $(document).ready(function(){
+
     $.post("../../controller/usuario.php?op=combo", function (data) {
         $('#usu_asig').html(data);
     });
@@ -21,6 +22,8 @@ $(document).ready(function(){
             "searching": true,
             lengthChange: false,
             colReorder: true,
+            columnDefs: [{ orderable: false, targets: 9 }],
+            order: [[0, 'des']],
             buttons: [		          
                     'copyHtml5',
                     'excelHtml5',
@@ -65,8 +68,8 @@ $(document).ready(function(){
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             }     
-        }).DataTable();
-    } else {
+        }).DataTable(); 
+    }else{
         tabla=$('#ticket_data').dataTable({
             "aProcessing": true,
             "aServerSide": true,
@@ -74,6 +77,8 @@ $(document).ready(function(){
             "searching": true,
             lengthChange: false,
             colReorder: true,
+            columnDefs: [{ orderable: false, targets: 9 }],
+            order: [[0, 'des']],
             buttons: [		          
                     'copyHtml5',
                     'excelHtml5',
@@ -117,7 +122,7 @@ $(document).ready(function(){
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             }     
-        }).DataTable();
+        }).DataTable(); 
     }
 
 });
