@@ -106,6 +106,9 @@ function asignar(tick_id){
 function guardar(e){
     e.preventDefault();
 	var formData = new FormData($("#ticket_form")[0]);
+    var usu_asig = formData.get("usu_asig");
+    console.log(usu_asig);
+
     $.ajax({
         url: "../../controller/ticket.php?op=asignar",
         type: "POST",
@@ -115,6 +118,10 @@ function guardar(e){
         success: function(datos){
             var tick_id = $('#tick_id').val();
             $.post("../../controller/email.php?op=ticket_asignado", {tick_id : tick_id}, function (data) {
+
+            });
+
+            $.post("../../controller/notificacion.php?op=ticket_asignado", {usu_asig: usu_asig, tick_id : tick_id}, function (data) {
 
             });
 

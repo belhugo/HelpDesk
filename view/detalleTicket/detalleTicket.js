@@ -1,3 +1,8 @@
+var usu_id = $('#user_idx').val();
+var rol_id =  $('#rol_idx').val();
+var usu_asig = 0;
+var usu_crea = 0;
+
 function init(){
    
 }
@@ -117,8 +122,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 $(document).on("click","#btnenviar", function(){
-    var tick_id = getUrlParameter('ID');
-    var usu_id = $('#user_idx').val();
+    var tick_id = getUrlParameter('ID');       
     var tickd_descrip = $('#tickd_descrip').val();
 
     if ($('#tickd_descrip').summernote('isEmpty')){
@@ -140,6 +144,24 @@ $(document).on("click","#btnenviar", function(){
             contentType: false,
             processData: false,
             success: function(data){
+                /* TODO: si Rol es 1 = Usuario insertar alerta para usuario soporte */
+                if (rol_id==1){
+                    /* TODO: Guardar Notificacion de nuevo Comentario */
+                    $.post("../../controller/notificacion.php?op=comentario_usuario", {usu_asig : usu_asig, tick_id : tick_id }, function (data) {
+                        
+                    });                
+                    
+                /* TODO: Else Rol es = 2 Soporte Insertar alerta para usuario que genero el ticket */
+                }else{
+                    /* TODO: Guardar Notificacion de nuevo Comentario */
+                    console.log(usu_crea);
+                    $.post("../../controller/notificacion.php?op=comentario_soporte", {usu_crea : usu_crea, tick_id : tick_id }, function (data) {
+                        
+                    });      
+                }
+
+
+
                 console.log(data);
                 listardetalle(tick_id);
                 /* TODO: Limpiar inputfile */
@@ -204,6 +226,9 @@ function listardetalle(tick_id){
         $('#prio_nom').val(data.prio_nom);
         $('#tick_titulo').val(data.tick_titulo);
         $('#tickd_descripusu').summernote ('code',data.tick_descrip);
+
+        usu_asig = data.usu_asig;
+        usu_crea = data.usu_id;
 
         console.log( data.tick_estado_texto);
         if (data.tick_estado_texto == "Cerrado"){

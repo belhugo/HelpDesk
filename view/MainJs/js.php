@@ -13,3 +13,8 @@
 <script src="../../public/js/lib/fancybox/jquery.fancybox.pack.js"></script>
 
 <script src="../../public/js/lib/select2/select2.full.min.js"></script>
+
+<!-- TODO: Libreria Notify Bootstrap -->
+<script src="../../public/js/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<script type="text/javascript" src="../notificacion.js"></script>
